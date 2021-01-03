@@ -97,11 +97,11 @@ let router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // Check for requiredAuth guard
+ 
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    //Check if not logged in
+    
     if (!firebase.auth().currentUser) {
-      //Go to login page
+      
       alert("You must be logged in to see this page!");
       next({
         path: "/login",
@@ -110,13 +110,13 @@ router.beforeEach((to, from, next) => {
         }
       });
     } else {
-      //Proceed to route
+      
       next();
     }
   } else if (to.matched.some((record) => record.meta.requiresGuest)) {
-    //Check if logged in
+    
     if (firebase.auth().currentUser) {
-      //Go to login page
+      
       next({
         path: "/",
         query: {
@@ -124,11 +124,11 @@ router.beforeEach((to, from, next) => {
         }
       });
     } else {
-      //Proceed to route
+      
       next();
     }
   } else {
-    //Proceed to route
+    
     next();
   }
 });
